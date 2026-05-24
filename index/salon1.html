@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Beauty Box — Luxury hair, beauty and wellness in the heart of the city. Book your transformation today."/>
+<meta name="google-site-verification" content="Jwt-CplN28qHI9Pm8pp4qjwjnVqVs3Ur2ONBhJsn0TU" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4W3QKVD');</script>
+<!-- End Google Tag Manager -->
+<title>Beauty Box</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;--gold-light:#E2C97A;--gold-dark:#8B6914;
+  --cream:#F5F0E8;--cream-dark:#E8E0CC;
+  --dark:#0A0806;--dark-2:#110E09;--dark-3:#1A140C;--dark-4:#221A10;
+  --glass:rgba(201,168,76,0.07);--glass-border:rgba(201,168,76,0.18);
+  --text-muted:rgba(245,240,232,0.5);--text-mid:rgba(245,240,232,0.75);
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--cream);font-family:'Montserrat',sans-serif;overflow-x:hidden}
+
+/* ===== LOADER ===== */
+#loader{position:fixed;inset:0;background:var(--dark);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .7s ease .2s, visibility .7s ease .2s}
+#loader.done{opacity:0;visibility:hidden}
+.loader-brand{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--gold);letter-spacing:.25em;font-weight:300;animation:loaderFadeIn 1s ease both}
+.loader-brand span{color:var(--cream)}
+.loader-bar-wrap{width:180px;height:1px;background:rgba(201,168,76,.15);margin-top:2.5rem;overflow:hidden}
+.loader-bar{height:100%;width:0;background:var(--gold);animation:loaderBar 2s cubic-bezier(.4,0,.2,1) .3s forwards}
+.loader-sub{font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;color:var(--text-muted);margin-top:1.2rem;animation:loaderFadeIn 1s ease .4s both}
+
+/* ===== NAV ===== */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.4rem 4rem;display:flex;align-items:center;justify-content:space-between;transition:all .5s ease}
+#nav.scrolled{background:rgba(10,8,6,.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--glass-border);padding:1rem 4rem}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--gold);letter-spacing:.2em;text-decoration:none;cursor:pointer;font-weight:300}
+.nav-logo span{color:var(--cream)}
+.nav-links{display:flex;gap:2.8rem;list-style:none;align-items:center}
+.nav-links li a{color:var(--cream);text-decoration:none;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;transition:color .3s;cursor:pointer;position:relative}
+.nav-links li a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links li a:hover{color:var(--gold)}
+.nav-links li a:hover::after{width:100%}
+.nav-book{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.5rem 1.6rem;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:all .3s;font-family:'Montserrat',sans-serif;font-weight:500}
+.nav-book:hover{background:var(--gold);color:var(--dark)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:22px;height:1px;background:var(--cream);display:block;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* Mobile menu */
+#mobile-menu{position:fixed;inset:0;background:rgba(10,8,6,.98);z-index:998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+#mobile-menu.open{transform:translateX(0)}
+#mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--cream);text-decoration:none;letter-spacing:.08em;transition:color .3s;cursor:pointer}
+#mobile-menu a:hover{color:var(--gold)}
+
+/* ===== PAGE ROUTING ===== */
+.page{display:none}
+.page.active{display:block}
+
+/* ===== SHARED SECTION STYLES ===== */
+section{padding:8rem 4rem}
+.section-tag{font-size:.58rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:300;line-height:1.08;margin-bottom:1.2rem}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-line{width:55px;height:1px;background:var(--gold)}
+.center{text-align:center}
+.center .section-line{margin:0 auto}
+.max-container{max-width:1240px;margin:0 auto}
+
+/* Reveal animations */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .75s ease,transform .75s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .75s ease,transform .75s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* ===== HERO ===== */
+.hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1800&q=80') center/cover no-repeat;transform:scale(1.06);will-change:transform}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,8,6,.9) 0%,rgba(10,8,6,.5) 60%,rgba(10,8,6,.78) 100%)}
+.hero-content{position:relative;text-align:center;padding:0 2rem;animation:heroFade .9s ease .3s both}
+.hero-eyebrow{font-size:.6rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;justify-content:center;gap:1.2rem}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:35px;height:1px;background:var(--gold);opacity:.7}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,9vw,8rem);font-weight:300;line-height:.95;letter-spacing:-.01em;margin-bottom:.6rem}
+.hero-title em{font-style:italic;color:var(--gold);display:block}
+.hero-subtitle{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--text-muted);font-weight:300;margin-bottom:3.5rem}
+.hero-btns{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--dark);padding:.9rem 2.8rem;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:600;transition:all .3s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-3px)}
+.btn-ghost{background:transparent;color:var(--cream);padding:.9rem 2.8rem;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;border:1px solid rgba(245,240,232,.3);cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:400;transition:all .3s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+.hero-scroll-hint{position:absolute;bottom:2.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;color:var(--text-muted);font-size:.55rem;letter-spacing:.4em;text-transform:uppercase}
+.scroll-pulse{width:1px;height:52px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 2s ease-in-out infinite}
+
+/* ===== ABOUT ===== */
+.about-section{background:var(--dark-2);padding:9rem 4rem}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1240px;margin:0 auto}
+.about-img-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;position:relative}
+.aimg{overflow:hidden;position:relative}
+.aimg img{width:100%;height:280px;object-fit:cover;display:block;filter:brightness(.82) sepia(.12);transition:all .6s ease}
+.aimg:hover img{transform:scale(1.06);filter:brightness(1) sepia(0)}
+.aimg-tall{grid-row:span 2}
+.aimg-tall img{height:574px}
+.about-badge{position:absolute;bottom:-1rem;right:-1rem;background:var(--gold);color:var(--dark);padding:1.8rem 1.5rem;text-align:center;z-index:5}
+.badge-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;line-height:1;display:block}
+.badge-text{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-top:.3rem;display:block}
+.about-text-wrap .section-line{margin-bottom:2rem}
+.about-lead{font-family:'Cormorant Garamond',serif;font-size:1.4rem;line-height:1.65;color:var(--cream);margin-bottom:1.5rem;font-weight:300;font-style:italic}
+.about-text-wrap p{color:var(--text-mid);line-height:2;font-size:.83rem;margin-bottom:1.2rem}
+.counters{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+.counter-card{text-align:center;padding:1.8rem 1rem;border:1px solid var(--glass-border);background:var(--glass)}
+.counter-num{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--gold);font-weight:300;line-height:1;display:block}
+.counter-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted);margin-top:.4rem;display:block}
+
+/* ===== SERVICES ===== */
+.services-section{background:var(--dark)}
+.services-intro{text-align:center;max-width:580px;margin:0 auto 5rem}
+.services-intro .section-line{margin:0 auto 2rem}
+.services-intro p{font-size:.82rem;color:var(--text-muted);line-height:1.9}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.5rem;max-width:1240px;margin:0 auto}
+.scard{background:var(--dark-3);border:1px solid var(--glass-border);padding:2.8rem;position:relative;overflow:hidden;cursor:pointer;transition:all .45s ease;group:true}
+.scard::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .45s ease}
+.scard:hover{transform:translateY(-8px);border-color:rgba(201,168,76,.45);background:var(--dark-4)}
+.scard:hover::after{transform:scaleX(1)}
+.scard-icon{font-size:1.8rem;margin-bottom:1.8rem;display:block;line-height:1;transition:transform .4s}
+.scard:hover .scard-icon{transform:scale(1.15)}
+.scard-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:.7rem;font-weight:400;color:var(--cream)}
+.scard-desc{font-size:.76rem;color:var(--text-muted);line-height:1.85;margin-bottom:2rem}
+.scard-footer{display:flex;align-items:flex-end;justify-content:space-between}
+.scard-price{display:flex;flex-direction:column;gap:.2rem}
+.price-from{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted)}
+.price-val{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);line-height:1}
+.price-dur{font-size:.65rem;color:var(--text-muted)}
+.scard-arrow{width:36px;height:36px;border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1rem;transition:all .4s;flex-shrink:0}
+.scard:hover .scard-arrow{border-color:var(--gold);background:var(--gold);color:var(--dark)}
+
+/* ===== GALLERY ===== */
+.gallery-section{background:var(--dark-2)}
+.gallery-intro{text-align:center;max-width:580px;margin:0 auto 4rem}
+.gallery-intro .section-line{margin:0 auto 2rem}
+.masonry{columns:3;column-gap:.9rem;max-width:1240px;margin:0 auto}
+.mitem{break-inside:avoid;margin-bottom:.9rem;overflow:hidden;position:relative;cursor:pointer}
+.mitem img{width:100%;display:block;transition:transform .55s ease,filter .4s;filter:brightness(.75) sepia(.1)}
+.mitem:hover img{transform:scale(1.08);filter:brightness(1) sepia(0)}
+.mitem-overlay{position:absolute;inset:0;background:rgba(10,8,6,.45);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s}
+.mitem:hover .mitem-overlay{opacity:1}
+.mitem-icon{width:52px;height:52px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.3rem}
+
+/* Lightbox */
+#lightbox{position:fixed;inset:0;background:rgba(10,8,6,.97);z-index:99998;display:none;align-items:center;justify-content:center;padding:2rem}
+#lightbox.open{display:flex}
+#lightbox img{max-width:90vw;max-height:88vh;object-fit:contain}
+#lightbox-close{position:absolute;top:1.8rem;right:2rem;background:none;border:1px solid var(--glass-border);color:var(--cream);width:46px;height:46px;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;transition:all .3s;line-height:1}
+#lightbox-close:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== TESTIMONIALS ===== */
+.testi-section{background:var(--dark);overflow:hidden}
+.testi-intro{text-align:center;max-width:560px;margin:0 auto 5rem}
+.testi-intro .section-line{margin:0 auto 2rem}
+.testi-slider-wrap{max-width:880px;margin:0 auto;overflow:hidden}
+.testi-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.tcard{flex:0 0 100%;padding:0 1rem}
+.tcard-inner{background:var(--dark-3);border:1px solid var(--glass-border);padding:3.5rem;position:relative}
+.tcard-inner::before{content:'\201C';font-family:'Cormorant Garamond',serif;font-size:7rem;color:var(--gold);position:absolute;top:-1.5rem;left:2.5rem;line-height:1;opacity:.25;pointer-events:none}
+.tcard-stars{display:flex;gap:.3rem;margin-bottom:1.8rem;color:var(--gold);font-size:.9rem}
+.tcard-text{font-family:'Cormorant Garamond',serif;font-size:1.28rem;line-height:1.75;color:var(--cream);font-style:italic;margin-bottom:2.5rem}
+.tcard-author{display:flex;align-items:center;gap:1.2rem}
+.tcard-avatar{width:52px;height:52px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0}
+.tcard-avatar img{width:100%;height:100%;object-fit:cover}
+.tcard-name{font-weight:600;font-size:.82rem;letter-spacing:.06em}
+.tcard-role{font-size:.65rem;color:var(--text-muted);letter-spacing:.18em;text-transform:uppercase;margin-top:.2rem}
+.testi-controls{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin-top:2.5rem}
+.testi-dots{display:flex;gap:.8rem}
+.tdot{width:7px;height:7px;border-radius:0;background:var(--dark-3);border:1px solid var(--glass-border);cursor:pointer;transition:all .3s}
+.tdot.active{background:var(--gold);border-color:var(--gold);width:22px}
+.testi-arrows{display:flex;gap:1rem}
+.tarr{background:none;border:1px solid var(--glass-border);color:var(--cream);width:44px;height:44px;cursor:pointer;transition:all .3s;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.tarr:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== TEAM ===== */
+.team-section{background:var(--dark-2)}
+.team-intro{text-align:center;max-width:560px;margin:0 auto 5rem}
+.team-intro .section-line{margin:0 auto 2rem}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.5rem;max-width:1240px;margin:0 auto}
+.team-card{position:relative;overflow:hidden;background:var(--dark-3);border:1px solid var(--glass-border)}
+.team-photo{height:340px;overflow:hidden}
+.team-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .4s;filter:grayscale(.25) brightness(.8)}
+.team-card:hover .team-photo img{transform:scale(1.09);filter:grayscale(0) brightness(1)}
+.team-info{padding:1.8rem}
+.team-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;margin-bottom:.3rem}
+.team-role{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.team-hover{position:absolute;inset:0;background:rgba(10,8,6,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;opacity:0;transition:opacity .45s;padding:2.5rem;text-align:center}
+.team-card:hover .team-hover{opacity:1}
+.team-hover-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
+.team-hover-bio{font-size:.78rem;line-height:1.85;color:var(--text-mid)}
+.team-socials{display:flex;gap:.8rem}
+.tsoc{width:36px;height:36px;border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--cream);font-size:.88rem;transition:all .3s;text-decoration:none;cursor:pointer}
+.tsoc:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== BOOKING ===== */
+.booking-section{background:var(--dark)}
+.booking-intro{text-align:center;margin-bottom:5rem}
+.booking-intro .section-line{margin:0 auto 2rem}
+.booking-card{background:var(--dark-3);border:1px solid var(--glass-border);padding:4rem;max-width:820px;margin:0 auto}
+.bform-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem}
+.bgroup{display:flex;flex-direction:column;gap:.65rem}
+.bgroup.full{grid-column:1/-1}
+.blabel{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.binput,.bselect{background:var(--dark-2);border:1px solid var(--glass-border);color:var(--cream);padding:.88rem 1.2rem;font-family:'Montserrat',sans-serif;font-size:.8rem;outline:none;transition:border-color .3s;width:100%;-webkit-appearance:none;appearance:none;border-radius:0}
+.binput:focus,.bselect:focus{border-color:var(--gold)}
+.binput::placeholder{color:var(--text-muted)}
+.bselect option{background:var(--dark-2);color:var(--cream)}
+.berror{font-size:.65rem;color:#E24B4A;display:none;margin-top:.2rem}
+.berror.show{display:block}
+.bsubmit{width:100%;margin-top:2rem;padding:1.1rem;background:var(--gold);color:var(--dark);border:none;font-family:'Montserrat',sans-serif;font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s}
+.bsubmit:hover{background:var(--gold-light)}
+.b-success{display:none;text-align:center;padding:3rem;color:var(--gold)}
+.b-success.show{display:block}
+.b-success h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;margin-bottom:.8rem}
+.b-success p{font-size:.82rem;color:var(--text-muted);line-height:1.8}
+
+/* ===== INSTAGRAM ===== */
+.insta-section{background:var(--dark-2)}
+.insta-intro{text-align:center;margin-bottom:3.5rem}
+.insta-intro .section-line{margin:0 auto 2rem}
+.insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem;max-width:1240px;margin:0 auto}
+.igitem{aspect-ratio:1;overflow:hidden;position:relative;cursor:pointer}
+.igitem img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .4s;filter:brightness(.75)}
+.igitem:hover img{transform:scale(1.12);filter:brightness(1)}
+.igitem-ov{position:absolute;inset:0;background:rgba(201,168,76,.18);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;color:white;font-size:1.5rem}
+.igitem:hover .igitem-ov{opacity:1}
+.insta-handle{text-align:center;margin-top:2rem;font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--text-muted)}
+.insta-handle a{color:var(--gold);text-decoration:none;transition:opacity .3s}
+.insta-handle a:hover{opacity:.75}
+
+/* ===== CONTACT ===== */
+.contact-section{background:var(--dark)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;max-width:1240px;margin:0 auto;align-items:start}
+.contact-info .section-line{margin-bottom:2rem}
+.map-box{background:var(--dark-3);border:1px solid var(--glass-border);height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:2rem}
+.map-box iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(1) brightness(.6)}
+.hours-block{margin:2rem 0}
+.hours-title{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:block}
+.hours-row{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid var(--glass-border);font-size:.78rem}
+.hours-day{color:var(--text-muted)}
+.hours-time{color:var(--cream)}
+.wa-btn{display:inline-flex;align-items:center;gap:.8rem;background:#25D366;color:white;padding:.85rem 1.8rem;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;border:none;cursor:pointer;margin-top:1rem;font-family:'Montserrat',sans-serif;transition:all .3s}
+.wa-btn:hover{background:#1fc45c;transform:translateY(-2px)}
+.contact-form-wrap .section-title{font-size:2rem;margin-bottom:.5rem}
+.contact-form-wrap .section-line{margin-bottom:2rem}
+.cform-group{display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.5rem}
+.clabel{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.cinput,.ctextarea{background:var(--dark-3);border:1px solid var(--glass-border);color:var(--cream);padding:.88rem 1.2rem;font-family:'Montserrat',sans-serif;font-size:.8rem;outline:none;transition:border-color .3s;width:100%;border-radius:0}
+.cinput:focus,.ctextarea:focus{border-color:var(--gold)}
+.cinput::placeholder,.ctextarea::placeholder{color:var(--text-muted)}
+.ctextarea{resize:vertical;min-height:110px}
+.csend{width:100%;padding:1rem;background:var(--gold);color:var(--dark);border:none;font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s}
+.csend:hover{background:var(--gold-light)}
+
+/* ===== FOOTER ===== */
+footer{background:var(--dark-2);border-top:1px solid var(--glass-border);padding:5rem 4rem 2.5rem}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1.6fr;gap:3.5rem;max-width:1240px;margin:0 auto 4rem}
+.footer-brand-logo{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--gold);letter-spacing:.18em;font-weight:300;margin-bottom:1.2rem;display:block;cursor:pointer}
+.footer-brand-logo span{color:var(--cream)}
+.footer-brand p{font-size:.76rem;color:var(--text-muted);line-height:1.95}
+.footer-col-title{font-size:.58rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:1.6rem;display:block}
+.footer-nav{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+.footer-nav a{color:var(--text-muted);text-decoration:none;font-size:.78rem;transition:color .3s;cursor:pointer;letter-spacing:.04em}
+.footer-nav a:hover{color:var(--gold)}
+.footer-newsletter p{font-size:.76rem;color:var(--text-muted);margin-bottom:1.4rem;line-height:1.85}
+.nl-form{display:flex}
+.nl-input{flex:1;background:var(--dark);border:1px solid var(--glass-border);border-right:none;color:var(--cream);padding:.78rem 1rem;font-size:.72rem;font-family:'Montserrat',sans-serif;outline:none;border-radius:0}
+.nl-input::placeholder{color:var(--text-muted)}
+.nl-btn{background:var(--gold);color:var(--dark);border:none;padding:.78rem 1.2rem;cursor:pointer;font-size:.85rem;font-weight:700;transition:all .3s;flex-shrink:0}
+.nl-btn:hover{background:var(--gold-light)}
+.footer-bottom{border-top:1px solid var(--glass-border);padding-top:2.2rem;display:flex;align-items:center;justify-content:space-between;max-width:1240px;margin:0 auto;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:.68rem;color:var(--text-muted)}
+.footer-socials{display:flex;gap:.9rem}
+.fsoc{width:34px;height:34px;border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.82rem;transition:all .3s;cursor:pointer;text-decoration:none}
+.fsoc:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== FLOATING WHATSAPP ===== */
+#float-wa{position:fixed;bottom:2.5rem;right:2.5rem;z-index:990;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;border:none;box-shadow:0 6px 24px rgba(37,211,102,.4);transition:transform .3s,box-shadow .3s}
+#float-wa:hover{transform:scale(1.12);box-shadow:0 8px 32px rgba(37,211,102,.55)}
+
+/* ===== PAGE HERO (sub-pages) ===== */
+.sub-hero{height:52vh;position:relative;display:flex;align-items:flex-end;padding:4rem;overflow:hidden}
+.sub-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.35) sepia(.2)}
+.sub-hero-content{position:relative}
+.sub-hero span{font-size:.58rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.8rem}
+.sub-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1}
+
+/* ===== ANIMATIONS ===== */
+@keyframes heroFade{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes loaderFadeIn{from{opacity:0;letter-spacing:.5em}to{opacity:1;letter-spacing:.25em}}
+@keyframes loaderBar{from{width:0}to{width:100%}}
+@keyframes scrollAnim{0%,100%{opacity:.25;height:32px}50%{opacity:1;height:52px}}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .about-inner,.contact-grid{grid-template-columns:1fr;gap:3rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .masonry{columns:2}
+  .insta-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+  #nav{padding:1.1rem 1.5rem}
+  #nav.scrolled{padding:.9rem 1.5rem}
+  .nav-links,.nav-book{display:none}
+  .hamburger{display:flex}
+  section{padding:5.5rem 1.5rem}
+  .about-img-grid{grid-template-columns:1fr;gap:.8rem}
+  .aimg-tall{grid-row:span 1}
+  .aimg-tall img,.aimg img{height:240px}
+  .about-badge{position:relative;right:auto;bottom:auto;display:inline-block;margin-top:1rem}
+  .masonry{columns:2}
+  .services-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .bform-grid{grid-template-columns:1fr}
+  .bgroup.full{grid-column:1}
+  .footer-grid{grid-template-columns:1fr}
+  .counters{grid-template-columns:1fr 1fr}
+  .insta-grid{grid-template-columns:repeat(3,1fr)}
+  .booking-card{padding:2rem 1.5rem}
+  .sub-hero{padding:2.5rem 1.5rem}
+}
+@media(max-width:480px){
+  .hero-title{font-size:3.2rem}
+  .masonry{columns:1}
+  .team-grid{grid-template-columns:1fr}
+  .insta-grid{grid-template-columns:repeat(2,1fr)}
+  footer{padding:4rem 1.5rem 2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-brand">Beauty <span> Box</span></div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-sub">Unisex Hair Studio</div>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<button id="float-wa" title="Chat on WhatsApp" onclick="openWA()">&#9993;</button>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+  <img id="lightbox-img" src="" alt="Gallery"/>
+</div>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <a onclick="navTo('home');closeMobile()">Home</a>
+  <a onclick="navTo('services');closeMobile()">Services</a>
+  <a onclick="navTo('about');closeMobile()">About</a>
+  <a onclick="navTo('gallery');closeMobile()">Gallery</a>
+  <a onclick="navTo('contact');closeMobile()">Contact</a>
+  <a onclick="navTo('booking');closeMobile()">Book Now</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" onclick="navTo('home')">Beauty<span> Box</span></a>
+  <ul class="nav-links">
+    <li><a onclick="navTo('home')">Home</a></li>
+    <li><a onclick="navTo('services')">Services</a></li>
+    <li><a onclick="navTo('about')">About</a></li>
+    <li><a onclick="navTo('gallery')">Gallery</a></li>
+    <li><a onclick="navTo('contact')">Contact</a></li>
+  </ul>
+  <button class="nav-book" onclick="navTo('booking')">Book Appointment</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===================== HOME PAGE ===================== -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" id="parallax-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Est. 2026 ·</div>
+      <h1 class="hero-title">Where Beauty<em>Becomes Art</em></h1>
+      <p class="hero-subtitle">Luxury Hair · Skin · Wellness</p>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="navTo('booking')">Book Appointment</button>
+        <button class="btn-ghost" onclick="navTo('services')">Explore Services</button>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-pulse"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW -->
+  <section class="about-section reveal">
+    <div class="about-inner">
+      <div class="about-img-grid reveal-left">
+        <div class="aimg aimg-tall">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80" alt="Salon interior"/>
+        </div>
+        <div class="aimg">
+          <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=700&q=80" alt="Hair styling"/>
+        </div>
+        <div class="aimg">
+          <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=700&q=80" alt="Beauty treatment"/>
+        </div>
+        <div class="about-badge">
+          <span class="badge-num">5+</span>
+          <span class="badge-text">Years of<br/>Excellence</span>
+        </div>
+      </div>
+      <div class="about-text-wrap reveal-right">
+        <span class="section-tag">Our Story</span>
+        <h2 class="section-title">Crafting <em>Timeless</em> Elegance</h2>
+        <div class="section-line" style="margin-bottom:2rem"></div>
+        <p class="about-lead">"Every visit is a ritual. Every transformation, a masterpiece."</p>
+        <p>Beauty Box was born from a singular vision — to create a sanctuary where artistry meets indulgence. Nestled in the heart of the city, we've spent over fifteen years perfecting the craft of beauty.</p>
+        <p>Our team of award-winning stylists and therapists bring passion, precision, and an uncompromising commitment to excellence to every service they render.</p>
+        <div class="counters">
+          <div class="counter-card">
+            <span class="counter-num" data-target="8500">0</span>
+            <span class="counter-label">Happy Clients</span>
+          </div>
+          <div class="counter-card">
+            <span class="counter-num" data-target="24">0</span>
+            <span class="counter-label">Expert Stylists</span>
+          </div>
+          <div class="counter-card">
+            <span class="counter-num" data-target="47">0</span>
+            <span class="counter-label">Awards Won</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW (3 cards) -->
+  <section class="services-section reveal">
+    <div class="services-intro">
+      <span class="section-tag">What We Offer</span>
+      <h2 class="section-title">Our <em>Signature</em> Services</h2>
+      <div class="section-line"></div>
+      <p style="font-size:.82rem;color:var(--text-muted);line-height:1.9;margin-top:1.5rem">Bespoke beauty rituals designed around you — because every client deserves an extraordinary experience.</p>
+    </div>
+    <div class="services-grid max-container" id="home-services-grid"></div>
+    <div style="text-align:center;margin-top:3rem">
+      <button class="btn-ghost" onclick="navTo('services')">View All Services</button>
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="gallery-section reveal">
+    <div class="gallery-intro">
+      <span class="section-tag">Our Work</span>
+      <h2 class="section-title">A Gallery of <em>Transformations</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="masonry max-container" id="home-gallery"></div>
+    <div style="text-align:center;margin-top:3rem">
+      <button class="btn-ghost" onclick="navTo('gallery')">View Full Gallery</button>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi-section reveal">
+    <div class="testi-intro">
+      <span class="section-tag">Client Love</span>
+      <h2 class="section-title">What Our <em>Guests</em> Say</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="testi-slider-wrap">
+      <div class="testi-track" id="testi-track"></div>
+    </div>
+    <div class="testi-controls">
+      <div class="testi-dots" id="testi-dots"></div>
+      <div class="testi-arrows">
+        <button class="tarr" onclick="testiPrev()">&#8592;</button>
+        <button class="tarr" onclick="testiNext()">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section reveal">
+    <div class="team-intro">
+      <span class="section-tag">Our People</span>
+      <h2 class="section-title">Meet the <em>Artists</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="team-grid max-container" id="team-grid"></div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="insta-section reveal">
+    <div class="insta-intro">
+      <span class="section-tag">Follow Along</span>
+      <h2 class="section-title">Life at <em>Beauty Box</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="insta-grid max-container" id="insta-grid"></div>
+    <p class="insta-handle">Follow us <a href="#">@Beautybox</a></p>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section reveal">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-tag">Find Us</span>
+        <h2 class="section-title">Visit Our <em>Sanctuary</em></h2>
+        <div class="section-line" style="margin-bottom:2rem"></div>
+        <div class="map-box">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7503.631024133567!2d75.3025957345744!3d19.890010604263633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdb99007f9d4625%3A0x2c07d62b3609b58e!2sBEAUTY%20BOX!5e0!3m2!1sen!2sin!4v1779434883161!5m2!1sen!2sin" title="Beauty Box Location" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="hours-block">
+          <span class="hours-title">Business Hours</span>
+          <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">10:00 AM – 8:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">9:00 AM – 9:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">11:00 AM – 6:00 PM</span></div>
+        </div>
+        <button class="wa-btn" onclick="openWA()">&#9993; Chat on WhatsApp</button>
+      </div>
+      <div class="contact-form-wrap">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">Send a <em>Message</em></h2>
+        <div class="section-line" style="margin-bottom:2rem"></div>
+        <div class="cform-group">
+          <label class="clabel">Your Name</label>
+          <input class="cinput" id="c-name" type="text" placeholder="Priya Sharma"/>
+        </div>
+        <div class="cform-group">
+          <label class="clabel">Email Address</label>
+          <input class="cinput" id="c-email" type="email" placeholder="priya@example.com"/>
+        </div>
+        <div class="cform-group">
+          <label class="clabel">Message</label>
+          <textarea class="ctextarea" id="c-msg" placeholder="How can we help you?"></textarea>
+        </div>
+        <button class="csend" onclick="sendContact()">Send Message</button>
+        <p id="c-success" style="display:none;color:var(--gold);font-size:.78rem;margin-top:1rem;letter-spacing:.05em">✓ Message received. We'll be in touch within 24 hours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-brand-logo" onclick="navTo('home')">Beauty<span> Box</span></span>
+        <p>A sanctuary of luxury beauty and wellness. We blend artistry with expertise to create transformations that make you feel extraordinary.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Navigate</span>
+        <ul class="footer-nav">
+          <li><a onclick="navTo('home')">Home</a></li>
+          <li><a onclick="navTo('about')">About Us</a></li>
+          <li><a onclick="navTo('services')">Services</a></li>
+          <li><a onclick="navTo('gallery')">Gallery</a></li>
+          <li><a onclick="navTo('booking')">Booking</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Services</span>
+        <ul class="footer-nav">
+          <li><a onclick="navTo('services')">Hair Cut</a></li>
+          <li><a onclick="navTo('services')">Hair Spa</a></li>
+          <li><a onclick="navTo('services')">Bridal Makeup</a></li>
+          <li><a onclick="navTo('services')">Skin Treatment</a></li>
+          <li><a onclick="navTo('services')">Nail Art</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter">
+        <span class="footer-col-title">Newsletter</span>
+        <p>Subscribe for exclusive offers, beauty tips and new service announcements.</p>
+        <div class="nl-form">
+          <input class="nl-input" id="nl-email" type="email" placeholder="Your email address"/>
+          <button class="nl-btn" onclick="subscribeNL()">&#8594;</button>
+        </div>
+        <p id="nl-msg" style="display:none;font-size:.7rem;color:var(--gold);margin-top:.8rem">✓ You're subscribed!</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2025 Beauty Box. All rights reserved.</span>
+      <div class="footer-socials">
+        <a class="fsoc" title="Instagram">&#9426;</a>
+        <a class="fsoc" title="Facebook">&#9427;</a>
+        <a class="fsoc" title="Twitter">&#9428;</a>
+        <a class="fsoc" title="YouTube">&#9432;</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== SERVICES PAGE ===================== -->
+<div class="page" id="page-services">
+  <div class="sub-hero">
+    <div class="sub-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1562322140-8baeececf3df?w=1600&q=80')"></div>
+    <div class="sub-hero-content">
+      <span>What We Offer</span>
+      <h1>Our <em style="font-style:italic;color:var(--gold)">Services</em></h1>
+    </div>
+  </div>
+  <section class="services-section">
+    <div class="services-intro" style="margin-bottom:4rem">
+      <span class="section-tag">Complete Menu</span>
+      <h2 class="section-title">All <em>Services</em></h2>
+      <div class="section-line"></div>
+      <p style="margin-top:1.5rem;font-size:.82rem;color:var(--text-muted);line-height:1.9">Every treatment is a bespoke experience crafted around your unique needs and desires.</p>
+    </div>
+    <div class="services-grid max-container" id="all-services-grid"></div>
+  </section>
+  <section style="background:var(--dark-2);padding:6rem 4rem;text-align:center">
+    <span class="section-tag">Ready?</span>
+    <h2 class="section-title">Book Your <em>Experience</em></h2>
+    <div class="section-line" style="margin:0 auto 2rem"></div>
+    <p style="color:var(--text-muted);font-size:.84rem;margin-bottom:2.5rem">Treat yourself to the luxury you deserve.</p>
+    <button class="btn-gold" onclick="navTo('booking')">Book Appointment</button>
+  </section>
+  <footer>
+    <div class="footer-bottom max-container">
+      <span class="footer-copy">&copy; 2025 Beauty Box. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== ABOUT PAGE ===================== -->
+<div class="page" id="page-about">
+  <div class="sub-hero">
+    <div class="sub-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1470259078422-826894b933aa?w=1600&q=80')"></div>
+    <div class="sub-hero-content">
+      <span>Who We Are</span>
+      <h1>Our <em style="font-style:italic;color:var(--gold)">Story</em></h1>
+    </div>
+  </div>
+  <section class="about-section">
+    <div class="about-inner max-container">
+      <div class="about-img-grid">
+        <div class="aimg aimg-tall"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80" alt="Salon"/></div>
+        <div class="aimg"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=700&q=80" alt="Styling"/></div>
+        <div class="aimg"><img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=700&q=80" alt="Treatment"/></div>
+        <div class="about-badge"><span class="badge-num">15+</span><span class="badge-text">Years of<br/>Excellence</span></div>
+      </div>
+      <div class="about-text-wrap">
+        <span class="section-tag">Est. 2026</span>
+        <h2 class="section-title">The Beauty Box<em>Philosophy</em></h2>
+        <div class="section-line" style="margin-bottom:2rem"></div>
+        <p class="about-lead">"Beauty is not a luxury — it is a language. We speak it fluently."</p>
+        <p>Founded in 2008 by master stylist Meera Kapoor, Beauty Box was built on a foundational belief: that every person deserves to feel extraordinary. What began as a boutique studio has grown into a landmark of luxury beauty.</p>
+        <p>We source only the finest professional-grade products — from Kerastase to La Mer — and our techniques are continually refined through global training programmes. We don't follow trends; we set them.</p>
+        <p>Our 4,500 sq ft salon features six private treatment suites, a bridal preparation lounge, a nail atelier, and a wellness spa — all designed with one purpose: your complete transformation.</p>
+        <div class="counters">
+          <div class="counter-card"><span class="counter-num" data-target="8500">0</span><span class="counter-label">Happy Clients</span></div>
+          <div class="counter-card"><span class="counter-num" data-target="24">0</span><span class="counter-label">Expert Stylists</span></div>
+          <div class="counter-card"><span class="counter-num" data-target="47">0</span><span class="counter-label">Awards Won</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="team-section">
+    <div class="team-intro">
+      <span class="section-tag">Our People</span>
+      <h2 class="section-title">Meet the <em>Team</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="team-grid max-container" id="about-team-grid"></div>
+  </section>
+  <footer>
+    <div class="footer-bottom max-container">
+      <span class="footer-copy">&copy; 2025 Beauty Box. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== GALLERY PAGE ===================== -->
+<div class="page" id="page-gallery">
+  <div class="sub-hero">
+    <div class="sub-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=80')"></div>
+    <div class="sub-hero-content">
+      <span>Our Portfolio</span>
+      <h1>The <em style="font-style:italic;color:var(--gold)">Gallery</em></h1>
+    </div>
+  </div>
+  <section class="gallery-section">
+    <div class="gallery-intro">
+      <span class="section-tag">Transformations</span>
+      <h2 class="section-title">Works of <em>Art</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="masonry max-container" id="full-gallery"></div>
+  </section>
+  <footer>
+    <div class="footer-bottom max-container">
+      <span class="footer-copy">&copy; 2025 Beauty Box. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== CONTACT PAGE ===================== -->
+<div class="page" id="page-contact">
+  <div class="sub-hero">
+    <div class="sub-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1600&q=80')"></div>
+    <div class="sub-hero-content">
+      <span>Get In Touch</span>
+      <h1>Contact <em style="font-style:italic;color:var(--gold)">Us</em></h1>
+    </div>
+  </div>
+  <section class="contact-section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-tag">Location</span>
+        <h2 class="section-title">Find <em>Us</em></h2>
+        <div class="section-line" style="margin-bottom:2rem"></div>
+        <p style="color:var(--text-muted);font-size:.82rem;line-height:1.9;margin-bottom:1.5rem">Nandanvan Colony, Padegaon, Chhatrapati Sambhajinagar, Aurangabad, Maharashtra 431004</p>
+        <p style="color:var(--text-muted);font-size:.82rem;line-height:1.9;margin-bottom:1rem">&#128222; +91-5454364644</p>
+        <p style="color:var(--gold);font-size:.82rem;line-height:1.9;margin-bottom:1.5rem">&#9993; hello@BeautyBox.in</p>
+        <div class="map-box">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14898.12345678!2d75.3433!3d19.8762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdb9888c4bd15dd%3A0x3ff96dc8d13b5b7e!2sAurangabad%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin" title="BeautyboxLocation" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="hours-block">
+          <span class="hours-title">Opening Hours</span>
+          <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">10:00 AM – 8:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">9:00 AM – 9:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">11:00 AM – 6:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day">Public Holidays</span><span class="hours-time">12:00 PM – 5:00 PM</span></div>
+        </div>
+        <button class="wa-btn" onclick="openWA()">; WhatsApp Us</button>
+      </div>
+      <div class="contact-form-wrap">
+        <span class="section-tag">Write To Us</span>
+        <h2 class="section-title">Send a <em>Message</em></h2>
+        <div class="section-line" style="margin-bottom:2rem"></div>
+        <div class="cform-group"><label class="clabel">Your Name</label><input class="cinput" id="cp-name" type="text" placeholder="Full name"/></div>
+        <div class="cform-group"><label class="clabel">Email</label><input class="cinput" id="cp-email" type="email" placeholder="you@example.com"/></div>
+        <div class="cform-group"><label class="clabel">Phone</label><input class="cinput" id="cp-phone" type="tel" placeholder="+91 00000 00000"/></div>
+        <div class="cform-group"><label class="clabel">Message</label><textarea class="ctextarea" id="cp-msg" placeholder="Your message..."></textarea></div>
+        <button class="csend" onclick="sendContactPage()">Send Message</button>
+        <p id="cp-success" style="display:none;color:var(--gold);font-size:.78rem;margin-top:1rem">✓ Thank you! We'll respond within 24 hours.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-bottom max-container">
+      <span class="footer-copy">&copy; 2025 Beauty Box. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== BOOKING PAGE ===================== -->
+<div class="page" id="page-booking">
+  <div class="sub-hero">
+    <div class="sub-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1600&q=80')"></div>
+    <div class="sub-hero-content">
+      <span>Reserve Your Visit</span>
+      <h1>Book an <em style="font-style:italic;color:var(--gold)">Appointment</em></h1>
+    </div>
+  </div>
+  <section class="booking-section">
+    <div class="booking-intro">
+      <span class="section-tag">Schedule</span>
+      <h2 class="section-title">Your <em>Transformation</em> Awaits</h2>
+      <div class="section-line"></div>
+      <p style="margin-top:1.5rem;color:var(--text-muted);font-size:.82rem">Fill in the form below and our team will confirm your appointment within 2 hours.</p>
+    </div>
+    <div class="booking-card">
+      <div id="bform-wrap">
+        <div class="bform-grid">
+          <div class="bgroup">
+            <label class="blabel">Full Name *</label>
+            <input class="binput" id="b-name" type="text" placeholder="Priya Sharma"/>
+            <span class="berror" id="b-name-err">Please enter your name</span>
+          </div>
+          <div class="bgroup">
+            <label class="blabel">Phone Number *</label>
+            <input class="binput" id="b-phone" type="tel" placeholder="+91 98765 43210"/>
+            <span class="berror" id="b-phone-err">Please enter a valid phone number</span>
+          </div>
+          <div class="bgroup">
+            <label class="blabel">Email Address</label>
+            <input class="binput" id="b-email" type="email" placeholder="priya@example.com"/>
+          </div>
+          <div class="bgroup">
+            <label class="blabel">Service *</label>
+            <select class="bselect" id="b-service">
+              <option value="">Select a service...</option>
+              <option>Hair Cut &amp; Styling</option>
+              <option>Hair Spa &amp; Treatment</option>
+              <option>Hair Coloring</option>
+              <option>Bridal Makeup</option>
+              <option>Skin Treatment</option>
+              <option>Facial</option>
+              
+            </select>
+            <span class="berror" id="b-service-err">Please select a service</span>
+          </div>
+          <div class="bgroup">
+            <label class="blabel">Preferred Date *</label>
+            <input class="binput" id="b-date" type="date"/>
+            <span class="berror" id="b-date-err">Please choose a date</span>
+          </div>
+          <div class="bgroup">
+            <label class="blabel">Preferred Time *</label>
+            <select class="bselect" id="b-time">
+              <option value="">Select time...</option>
+              <option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option>
+              <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+              <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option>
+            </select>
+            <span class="berror" id="b-time-err">Please select a time</span>
+          </div>
+          <div class="bgroup full">
+            <label class="blabel">Special Requests</label>
+            <input class="binput" id="b-notes" type="text" placeholder="Any allergies, preferences or special requests..."/>
+          </div>
+        </div>
+        <button class="bsubmit" onclick="submitBooking()">Confirm Appointment</button>
+      </div>
+      <div class="b-success" id="b-success">
+        <div style="font-size:2.5rem;margin-bottom:1rem;color:var(--gold)">✦</div>
+        <h3>Appointment Requested!</h3>
+        <p>Thank you for choosing Beauty Box. We'll confirm your appointment via phone or email within 2 hours.<br/><br/>We look forward to welcoming you.</p>
+        <button class="btn-gold" style="margin-top:2rem" onclick="navTo('home')">Back to Home</button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-bottom max-container">
+      <span class="footer-copy">&copy; 2025 Beauty Box. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ===== DATA =====
+const SERVICES = [
+  {icon:'✂️',name:'Hair Cut & Styling',desc:'Precision cuts tailored to your bone structure and lifestyle. From classic bobs to editorial avant-garde.',price:'₹800',dur:'45 min'},
+  {icon:'🌿',name:'Hair Spa',desc:'Deep nourishing treatment that restores lustre, strength and vitality to even the most damaged hair.',price:'₹1,200',dur:'60 min'},
+  {icon:'👰',name:'Bridal Makeup',desc:'Your most important day deserves perfection. Our bridal artists create looks that photograph beautifully.',price:'₹8,500',dur:'3 hrs'},
+  {icon:'✨',name:'Skin Treatment',desc:'Medical-grade facials and skin therapies personalised to your skin type and concerns.',price:'₹2,500',dur:'75 min'},
+  {icon:'💅',name:'Nail Art',desc:'Intricate nail artistry from classic French manicures to elaborate bespoke designs with gel or acrylic.',price:'₹650',dur:'50 min'},
+  {icon:'🌸',name:'Facial',desc:'Rejuvenating facial treatments using luxury skincare lines. Cleansing, exfoliating and hydrating rituals.',price:'₹1,800',dur:'60 min'},
+  {icon:'🎨',name:'Hair Coloring',desc:'Global colour, balayage, highlights and creative colour by our internationally trained colourists.',price:'₹2,200',dur:'90 min'},
+];
+
+const TESTIMONIALS = [
+  {name:'Ananya Deshmukh',role:'Bride · September 2024',text:'My bridal makeup was nothing short of miraculous. The team at Beauty Box understood my vision immediately and executed it flawlessly. I felt like royalty on my wedding day.',avatar:'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=200&q=80'},
+  {name:'Rohan Mehta',role:'Regular Client',text:'I\'ve been coming to Beauty Box for three years and my hair has never been healthier. The hair spa treatments are genuinely transformative — the results speak for themselves.',avatar:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80'},
+  {name:'Sneha Kulkarni',role:'Monthly Facial Client',text:'The skin treatments here are on another level. My skin cleared up completely within two sessions. The ambiance is so calming — it truly feels like a wellness retreat.',avatar:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80'},
+  {name:'Priti Joshi',role:'Loyal Client · 5 Years',text:'Beauty Box is my sacred space. The stylists genuinely care about your hair health, not just the service. I always leave feeling like the best version of myself.',avatar:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80'},
+];
+
+const TEAM = [
+  {name:'Meera Kapoor',role:'Founder & Master Stylist',bio:'20 years of expertise in luxury hair. Trained in Paris and London. Meera\'s signature cuts are sought after across Maharashtra.',img:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80'},
+  {name:'Arjun Nair',role:'Senior Colourist',bio:'Award-winning colourist specialising in balayage and creative colour. Arjun brings Parisian technique to every session.',img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80'},
+  {name:'Kavya Reddy',role:'Bridal Makeup Artist',bio:'Featured in Vogue India and Femina. Kavya has created bridal looks for over 400 weddings across India.',img:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80'},
+  {name:'Aditya Shah',role:'Skin & Wellness Expert',bio:'Certified aesthetician and wellness coach. Aditya\'s personalised skin regimens have helped hundreds achieve radiant, healthy skin.',img:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80'},
+];
+
+const GALLERY_IMGS = [
+  {src:'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80',tall:true},
+  {src:'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80',tall:false},
+  {src:'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80',tall:true},
+  {src:'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80',tall:false},
+  {src:'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80',tall:false},
+  {src:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&q=80',tall:true},
+  {src:'https://images.unsplash.com/photo-1470259078422-826894b933aa?w=600&q=80',tall:false},
+  {src:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80',tall:false},
+  {src:'https://images.unsplash.com/photo-1619451334792-150fd785ee74?w=600&q=80',tall:true},
+];
+
+const INSTA_IMGS = [
+  'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&q=80',
+  'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&q=80',
+  'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&q=80',
+  'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=400&q=80',
+  'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80',
+  'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&q=80',
+];
+
+// ===== INIT =====
+let testiIndex = 0;
+let testiTimer;
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Loader
+  setTimeout(() => document.getElementById('loader').classList.add('done'), 2200);
+
+  renderServicesGrid('home-services-grid', 3);
+  renderServicesGrid('all-services-grid', SERVICES.length);
+  renderGallery('home-gallery', 6);
+  renderGallery('full-gallery', GALLERY_IMGS.length);
+  renderTestimonials();
+  renderTeam('team-grid');
+  renderTeam('about-team-grid');
+  renderInsta();
+
+  // Scroll effects
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Parallax
+  window.addEventListener('scroll', () => {
+    const bg = document.getElementById('parallax-bg');
+    if (bg) bg.style.transform = `scale(1.06) translateY(${window.scrollY * 0.18}px)`;
+  });
+
+  // Counter observer
+  observeCounters();
+
+  // Testimonial auto-play
+  testiTimer = setInterval(testiNext, 5000);
+
+  // Set min date on booking
+  const today = new Date().toISOString().split('T')[0];
+  const dateInput = document.getElementById('b-date');
+  if (dateInput) dateInput.min = today;
+});
+
+// ===== RENDER FUNCTIONS =====
+function renderServicesGrid(id, count) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = SERVICES.slice(0, count).map(s => `
+    <div class="scard reveal">
+      <span class="scard-icon">${s.icon}</span>
+      <h3 class="scard-name">${s.name}</h3>
+      <p class="scard-desc">${s.desc}</p>
+      <div class="scard-footer">
+        <div class="scard-price">
+          <span class="price-from">Starting from</span>
+          <span class="price-val">${s.price}</span>
+          <span class="price-dur">${s.dur}</span>
+        </div>
+        <div class="scard-arrow">&#8594;</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderGallery(id, count) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = GALLERY_IMGS.slice(0, count).map(img => `
+    <div class="mitem" onclick="openLightbox('${img.src.replace('w=600','w=1400')}')">
+      <img src="${img.src}" alt="Gallery" loading="lazy"/>
+      <div class="mitem-overlay"><div class="mitem-icon">+</div></div>
+    </div>
+  `).join('');
+}
+
+function renderTestimonials() {
+  const track = document.getElementById('testi-track');
+  const dots = document.getElementById('testi-dots');
+  if (!track || !dots) return;
+  track.innerHTML = TESTIMONIALS.map(t => `
+    <div class="tcard">
+      <div class="tcard-inner">
+        <div class="tcard-stars">${'★'.repeat(5)}</div>
+        <p class="tcard-text">"${t.text}"</p>
+        <div class="tcard-author">
+          <div class="tcard-avatar"><img src="${t.avatar}" alt="${t.name}" loading="lazy"/></div>
+          <div>
+            <p class="tcard-name">${t.name}</p>
+            <p class="tcard-role">${t.role}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  dots.innerHTML = TESTIMONIALS.map((_, i) => `<div class="tdot ${i===0?'active':''}" onclick="goToTesti(${i})"></div>`).join('');
+}
+
+function renderTeam(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = TEAM.map(m => `
+    <div class="team-card reveal">
+      <div class="team-photo"><img src="${m.img}" alt="${m.name}" loading="lazy"/></div>
+      <div class="team-info">
+        <h3 class="team-name">${m.name}</h3>
+        <p class="team-role">${m.role}</p>
+      </div>
+      <div class="team-hover">
+        <p class="team-hover-name">${m.name}</p>
+        <p class="team-hover-bio">${m.bio}</p>
+        <div class="team-socials">
+          <a class="tsoc" title="Instagram">&#9426;</a>
+          <a class="tsoc" title="LinkedIn">in</a>
+          <a class="tsoc" title="Facebook">&#9427;</a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderInsta() {
+  const el = document.getElementById('insta-grid');
+  if (!el) return;
+  el.innerHTML = INSTA_IMGS.map(src => `
+    <div class="igitem" onclick="openLightbox('${src.replace('w=400','w=1200')}')">
+      <img src="${src}" alt="Instagram" loading="lazy"/>
+      <div class="igitem-ov">&#10010;</div>
+    </div>
+  `).join('');
+}
+
+// ===== NAV / PAGE ROUTING =====
+function navTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-'+page);
+  if (el) {
+    el.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    setTimeout(() => observeReveal(), 100);
+    if (page !== 'home') {
+      // Re-render team for about page
+      if (page === 'about') {
+        renderTeam('about-team-grid');
+        observeCounters();
+      }
+    }
+  }
+}
+
+function toggleMobile() {
+  const menu = document.getElementById('mobile-menu');
+  const ham = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  ham.classList.toggle('open');
+}
+
+function closeMobile() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+// ===== SCROLL =====
+function onScroll() {
+  const nav = document.getElementById('nav');
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+  observeReveal();
+}
+
+function observeReveal() {
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+  });
+}
+
+// ===== COUNTERS =====
+function observeCounters() {
+  setTimeout(() => {
+    document.querySelectorAll('.counter-num[data-target]').forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'));
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current).toLocaleString('en-IN');
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    });
+  }, 600);
+}
+
+// ===== LIGHTBOX =====
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ===== TESTIMONIALS =====
+function updateTesti() {
+  document.getElementById('testi-track').style.transform = `translateX(-${testiIndex * 100}%)`;
+  document.querySelectorAll('.tdot').forEach((d, i) => d.classList.toggle('active', i === testiIndex));
+}
+
+function testiNext() {
+  testiIndex = (testiIndex + 1) % TESTIMONIALS.length;
+  updateTesti();
+}
+
+function testiPrev() {
+  testiIndex = (testiIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
+  updateTesti();
+  clearInterval(testiTimer);
+  testiTimer = setInterval(testiNext, 5000);
+}
+
+function goToTesti(i) {
+  testiIndex = i;
+  updateTesti();
+  clearInterval(testiTimer);
+  testiTimer = setInterval(testiNext, 5000);
+}
+
+// ===== BOOKING FORM =====
+ function submitBooking() {
+  const name = document.getElementById('b-name').value;
+  const phone = document.getElementById('b-phone').value;
+  const service = document.getElementById('b-service').value;
+  const date = document.getElementById('b-date').value;
+  const time = document.getElementById('b-time').value;
+
+  const msg = `New Booking
+Name : ${name}
+Phone : ${phone}
+Service : ${service}
+Date : ${date}
+Time : ${time}`;
+
+
+  window.open(
+    `https://wa.me/7770071037?text=${encodeURIComponent(msg)}`,
+    '_blank'
+  );
+}
+
+// ===== CONTACT FORM =====
+function sendContact() {
+  const name = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const msg = document.getElementById('c-msg').value.trim();
+  if (name && email && msg) {
+    document.getElementById('c-success').style.display = 'block';
+    document.getElementById('c-name').value = '';
+    document.getElementById('c-email').value = '';
+    document.getElementById('c-msg').value = '';
+  }
+}
+
+
+
+function sendContactPage() {
+  const name = document.getElementById('cp-name').value.trim();
+  const email = document.getElementById('cp-email').value.trim();
+  const msg = document.getElementById('cp-msg').value.trim();
+  if (name && email && msg) {
+    document.getElementById('cp-success').style.display = 'block';
+    document.getElementById('cp-name').value = '';
+    document.getElementById('cp-email').value = '';
+    document.getElementById('cp-phone').value = '';
+    document.getElementById('cp-msg').value = '';
+  }
+}
+
+// ===== NEWSLETTER =====
+function subscribeNL() {
+  const val = document.getElementById('nl-email').value.trim();
+  if (val && val.includes('@')) {
+    document.getElementById('nl-msg').style.display = 'block';
+    document.getElementById('nl-email').value = '';
+  }
+}
+
+// ===== WHATSAPP =====
+function openWA() {
+  window.open('https://wa.me/7770071037?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20Beauty%20Box.','_blank');
+}
+
+</script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4W3QKVD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+</html>
